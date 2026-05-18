@@ -1,0 +1,366 @@
+ <!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vzorová stránka</title>
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ozlukasko-arch.github.io/sablona/" />
+    <meta property="og:title" content="OZ Lukáško | Test zdielania" />
+    <meta property="og:description" content="Pomôžte nám prepísať osud láskou. Premeňte svoje dane na pomoc pre Lukáška." />
+    <meta property="og:image" content="https://ozlukasko-arch.github.io/sablona/foto1.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --p-grad: linear-gradient(135deg, #ff0080 0%, #7928ca 100%);
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text: #2d3436;
+            --header-height: 80px;
+            --fb-blue: #1877F2;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; 
+            padding-top: var(--header-height);
+            background: #fff5f8;
+            color: var(--text);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 192, 203, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(186, 104, 200, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 182, 193, 0.4) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        header { 
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 0 5%; 
+            height: var(--header-height);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: fixed; 
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+            background: var(--p-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none; 
+        }
+
+        nav { display: flex; align-items: center; }
+
+        nav a { 
+            text-decoration: none; 
+            color: var(--text); 
+            font-weight: 600; 
+            margin-left: 18px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: #ff0080; }
+
+        /* Špeciálne štýly pre sociálne ikony v menu */
+        .social-icon {
+            font-size: 1.2rem;
+            padding: 5px 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover { transform: scale(1.1); background: white; }
+
+        .hero { 
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(255, 245, 248, 1) 100%);
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .container { 
+            max-width: 900px; 
+            margin: -40px auto 100px; 
+            padding: 0 20px; 
+            display: flex;
+            flex-direction: column;
+            gap: 120px; 
+            position: relative;
+            z-index: 3;
+        }
+
+        .card, .iban-card {
+            scroll-margin-top: 110px; 
+            width: 100%;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 35px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+        }
+
+        h2 { 
+            font-size: 2rem; 
+            margin-top: 0;
+            background: var(--p-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .iban-card {
+            background: var(--p-grad);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 35px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(121, 40, 202, 0.2);
+        }
+
+        .iban-card h2 { -webkit-text-fill-color: white; }
+
+        .iban {
+            font-family: monospace;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            background: rgba(255,255,255,0.2);
+            padding: 18px;
+            border-radius: 15px;
+            display: block;
+            margin: 25px 0;
+            border: 1px solid rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #7928ca;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255,255,255,0.6);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* --- ŠTÝLY PRE NOVÉ TLAČIDLÁ ZDIEĽANIA --- */
+        .banner-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .banner-share-btn:hover {
+            background-color: #ffffff;
+            color: #7928ca;
+            transform: translateY(-2px);
+        }
+
+        .floating-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .share-float {
+            background-color: var(--fb-blue);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .share-float:hover { transform: scale(1.05); box-shadow: 0 15px 25px rgba(0,0,0,0.3); color: white; }
+
+        .whatsapp-float {
+            background-color: #25d366;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            align-self: flex-end;
+        }
+
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 15px 25px rgba(0,0,0,0.3); }
+
+        @media (max-width: 800px) {
+            body { padding-top: 0; }
+            header { position: relative; flex-direction: column; height: auto; padding: 1.5rem; gap: 15px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            nav a { margin: 0 5px; font-size: 0.8rem; }
+            .container { gap: 80px; margin-top: -20px; }
+            .hero { height: 350px; }
+            .card, .iban-card { scroll-margin-top: 20px; padding: 40px 25px; }
+            .floating-container { bottom: 20px; right: 20px; gap: 10px; }
+            .share-float { padding: 10px 18px; font-size: 0.8rem; }
+            .whatsapp-float { width: 48px; height: 48px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="#" class="logo">✨ NAŠA NÁDEJ</a>
+    <nav>
+        <a href="#pribeh">Príbeh</a>
+        <a href="#pomoc">Pomoc</a>
+        <a href="#dane">2 % z dane</a>
+        <a href="#fotky">Fotky</a>
+        <a href="https://wa.me/421900000000" target="_blank" class="social-icon" title="WhatsApp">💬</a>
+        <a href="https://facebook.com/tvojastranka" target="_blank" class="social-icon" title="Facebook">💙</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Rozprávka pre bojovníka</h1>
+        <p style="font-size: 1.2rem; opacity: 0.95; font-weight: 600;">Pomôžte nám prepísať osud láskou</p>
+        
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://ozlukasko-arch.github.io/sablona/" target="_blank" rel="noopener noreferrer" class="banner-share-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+            Pomôžte zdieľaním
+        </a>
+    </div>
+</section>
+
+<div class="container">
+    <div class="card" id="pribeh">
+        <h2>Kúzelný príbeh odvahy</h2>
+        <p>Naša cesta začala nečakane, keď sa náš chlapec vypýtal na svet skôr. Diagnóza DMO nám síce postavila do cesty prekážky, ale nevzala nám nádej. Každý deň bojujeme s úsmevom a vďaka vašej podpore dokážeme financovať náročné rehabilitácie.</p>
+    </div>
+
+    <div class="iban-card" id="pomoc">
+        <h2>Podporiť zázrak</h2>
+        <p style="font-weight: 600;">Náš transparentný účet:</p>
+        <span class="iban">SK12 0000 0000 0000 0000 0000</span>
+        <p style="font-weight: 600;">Variabilný symbol: 2026</p>
+        <p style="font-size: 0.95rem; opacity: 0.9;">Ďakujeme za každý dar.</p>
+    </div>
+
+    <div class="card" id="dane">
+        <h2>2% z dane</h2>
+        <p>Premeňte svoje dane na pomoc. Je to jednoduchý krok, ktorý pre nás znamená obrovskú zmenu v dostupnosti terapií.</p>
+        <p style="font-size: 1.2rem;"><strong>IČO: 12345678</strong></p>
+        <a href="https://rozhodni.sk/poukazatel/tlaciva-na-poukazanie-2-z-dane/" target="_blank" class="btn" style="background: var(--p-grad); color: white;">Stiahnuť tlačivo</a>
+    </div>
+
+    <div class="card" id="fotky">
+        <h2>Momentky šťastia</h2>
+        <div class="photo-gallery">
+            <img src="foto1.jpg" alt="Foto 1">
+            <img src="foto2.jpg" alt="Foto 2">
+            <img src="foto3.jpg" alt="Foto 3">
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Vytvorené s ❤️ pre <strong>OZ Lukáško</strong></p>
+    <a href="http://lukasko.sk" style="color: #7928ca; text-decoration: none; font-weight: 800; font-size: 1.1rem;">www.lukasko.sk</a>
+</footer>
+
+<div class="floating-container">
+    
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://ozlukasko-arch.github.io/sablona/" target="_blank" rel="noopener noreferrer" class="share-float">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+        Pomôžte zdieľaním
+    </a>
+
+    <a href="https://wa.me/421900000000" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 448 512" width="28" height="28" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.5 2.5-11.2 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.5 5.5-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.3 5.7 23.5 9.2 31.6 11.8 13.4 4.3 25.5 3.6 35.2 2.2 10.8-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+
+</div>
+
+</body>
+</html>    
